@@ -1,6 +1,7 @@
 
 import resumePdf from "../assets/resume.pdf";
 
+
 export default function ResumePage() {
   return (
     <div className="w-full min-h-screen px-4 py-16 flex flex-col items-center stars">
