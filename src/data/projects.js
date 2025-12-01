@@ -1,25 +1,28 @@
-// src/data/projects.js
-const projects = [
+// keep imports minimal and Vite-friendly
+export const PROJECTS = [
   {
-    id: "p1",
-    title: "Portfolio Website",
-    short: "Personal portfolio built with React + Vite",
-    description: "A portfolio showing projects, blog links and contact. Theme toggle, responsive layout and project modals.",
-    tech: ["React", "Vite", "CSS"],
-    img: "/assets/project1.png",
-    live: "#",
-    repo: "#"
+    title: "Chatify",
+    description:
+      "Personal chat room / workspace built with React, Firebase and Material-UI. Includes realtime messaging, image sharing and reactions.",
+    image: new URL("../assets/project-chatify.png", import.meta.url).href,
+    github: "https://github.com/yourname/chatify",
+    demo: "#",
   },
   {
-    id: "p2",
-    title: "Todo App",
-    short: "Simple todo app with localStorage",
-    description: "Add, edit and remove tasks. Local persistence and filter by status.",
-    tech: ["React", "localStorage"],
-    img: "/assets/project2.png",
-    live: "#",
-    repo: "#"
-  }
+    title: "Bits-Of-Code",
+    description:
+      "Personal blog built with Next.js + Tailwind. Renders markdown posts, supports dark mode and easy publishing workflow.",
+    image: new URL("../assets/project-blog.png", import.meta.url).href,
+    github: "https://github.com/yourname/bits-of-code",
+    demo: "#",
+  },
+  {
+    title: "Editor.io",
+    description:
+      "Online Markdown + code editor with instant preview and local autosave. Supports custom HTML blocks and GFM.",
+    image: new URL("../assets/project-editor.png", import.meta.url).href,
+    github: "https://github.com/yourname/editor-io",
+    demo: "#",
+  },
+  // add more items here
 ];
-
-export default projects;
