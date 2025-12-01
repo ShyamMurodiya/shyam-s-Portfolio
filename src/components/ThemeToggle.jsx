@@ -2,58 +2,39 @@
 import React from "react";
 
 export default function ThemeToggle({ theme, setTheme }) {
-  const toggleTheme = () =>
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
 
   const isDark = theme === "dark";
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={toggle}
       aria-label="Toggle Theme"
       className="
-        relative
-        w-16 h-8 
-        flex items-center
-        rounded-full
-        transition-all
-        duration-300
-        border border-white/10
-        bg-[var(--card)]
-        dark:bg-white/10
-        focus:outline-none focus:ring-2 focus:ring-[var(--accent)]
+        relative w-16 h-8 
+        flex items-center 
+        bg-[var(--accent)]/40 
+        border border-[var(--accent)] 
+        rounded-full 
+        p-1 
+        transition-all duration-300
       "
     >
-      {/* Sliding circle */}
-      <span
+      {/* Slider circle */}
+      <div
         className={`
-          absolute w-6 h-6 rounded-full 
-          bg-white dark:bg-black
-          shadow-lg
+          absolute top-1 left-1
+          w-6 h-6 
+          rounded-full 
+          bg-black dark:bg-white
+          flex items-center justify-center
+          text-lg
           transition-all duration-300
-          transform
-          ${isDark ? "translate-x-8" : "translate-x-1"}
+          ${isDark ? "translate-x-8" : "translate-x-0"}
         `}
-      />
-
-      {/* Icons */}
-      <span
-        className="
-          absolute left-1 text-xs  
-          text-yellow-400
-        "
       >
-        ☀️
-      </span>
-
-      <span
-        className="
-          absolute right-1 text-xs
-          text-blue-400
-        "
-      >
-        🌙
-      </span>
+        {isDark ? "🌙" : "☀️"}
+      </div>
     </button>
   );
 }
