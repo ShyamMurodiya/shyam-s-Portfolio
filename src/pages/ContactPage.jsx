@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null); // null | "success" | "error"
 
   // === Your EmailJS Keys ===
   const SERVICE_ID = "shyam_2004";
@@ -15,13 +12,12 @@ const Contact = () => {
   const PUBLIC_KEY = "ccaJAlffQJPIxKNS5";
   // =========================
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const handleChange = (e) => setFormData((p) => ({ ...p, [e.target.name]: e.target.value }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatus(null);
 
     const templateParams = {
       from_name: formData.name,
@@ -33,91 +29,125 @@ const Contact = () => {
       .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
       .then(() => {
         setLoading(false);
-        alert("Message sent successfully! Check your email.");
+        setStatus("success");
         setFormData({ name: "", email: "", message: "" });
       })
       .catch((error) => {
-        setLoading(false);
         console.error("EmailJS Error:", error);
-        alert("Failed to send message. Check console.");
+        setLoading(false);
+        setStatus("error");
       });
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 mt-24">
+    <main className="min-h-screen flex items-center justify-center px-4 py-12">
       <div
         className="
-          max-w-2xl w-full 
-          bg-white/5 
-          backdrop-blur-xl 
-          border border-white/10 
-          p-10 rounded-2xl 
-          shadow-[0_8px_32px_rgba(0,0,0,0.4)]
+          w-full max-w-2xl
+          bg-white/95 text-gray-900
+          dark:bg-white/5 dark:text-white
+          border border-gray-200 dark:border-white/10
+          p-6 sm:p-8 md:p-10 rounded-2xl
+          shadow-lg
         "
       >
-        <h1 className="text-4xl font-bold mb-4 text-[var(--accent)]">
-          Contact Me
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 text-center md:text-left">
+          <span className="text-[var(--accent)]">Contact Me</span>
         </h1>
-        <p className="text-gray-300 mb-8">
+
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-6 text-center md:text-left">
           Fill the form below to send me a message.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
-          
+        {/* status */}
+        {status === "success" && (
+          <div className="mb-4 rounded-md p-3 bg-green-50 text-green-800 text-sm">
+            ✓ Message sent — I will reply soon.
+          </div>
+        )}
+        {status === "error" && (
+          <div className="mb-4 rounded-md p-3 bg-red-50 text-red-800 text-sm">
+            ✖ Failed to send. Please try again or email me directly.
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 text-gray-200">Your Name</label>
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+              Your Name
+            </label>
             <input
-              type="text"
               name="name"
-              required
-              placeholder="Enter your name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 
-              text-white focus:border-[var(--accent)] outline-none"
+              required
+              placeholder="Enter your name"
+              className="
+                w-full p-3 rounded-xl
+                bg-white border border-gray-200 placeholder-gray-400 text-gray-900
+                focus:ring-2 focus:ring-[var(--accent)] outline-none
+                dark:bg-white/5 dark:border-white/10 dark:placeholder-gray-300 dark:text-white
+                transition
+              "
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-gray-200">Your Email</label>
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+              Your Email
+            </label>
             <input
-              type="email"
               name="email"
-              required
-              placeholder="Enter your email"
+              type="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 rounded-xl bg-white/5 border border-white/10 
-              text-white focus:border-[var(--accent)] outline-none"
+              required
+              placeholder="Enter your email"
+              className="
+                w-full p-3 rounded-xl
+                bg-white border border-gray-200 placeholder-gray-400 text-gray-900
+                focus:ring-2 focus:ring-[var(--accent)] outline-none
+                dark:bg-white/5 dark:border-white/10 dark:placeholder-gray-300 dark:text-white
+                transition
+              "
             />
           </div>
 
           <div>
-            <label className="block mb-1 text-gray-200">Message</label>
+            <label className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+              Message
+            </label>
             <textarea
               name="message"
-              required
-              placeholder="Write your message..."
               value={formData.message}
               onChange={handleChange}
-              className="w-full p-3 h-32 rounded-xl bg-white/5 border border-white/10 
-              text-white focus:border-[var(--accent)] outline-none resize-none"
-            ></textarea>
+              required
+              placeholder="Write your message..."
+              rows={6}
+              className="
+                w-full p-3 rounded-xl
+                bg-white border border-gray-200 placeholder-gray-400 text-gray-900
+                focus:ring-2 focus:ring-[var(--accent)] outline-none resize-y
+                dark:bg-white/5 dark:border-white/10 dark:placeholder-gray-300 dark:text-white
+                transition
+              "
+            />
           </div>
 
           <button
             type="submit"
-            className={`w-full py-3 font-bold bg-[var(--accent)] text-black 
-            rounded-xl transition 
-            ${loading ? "opacity-60 pointer-events-none" : "hover:opacity-90"}`}
+            disabled={loading}
+            className={`
+              w-full py-3 rounded-xl font-semibold
+              bg-[var(--accent)] text-black
+              ${loading ? "opacity-60 pointer-events-none" : "hover:opacity-95"}
+              transition
+            `}
           >
-            {loading ? "Sending…" : "Send Message"}
+            {loading ? "Sending..." : "Send Message"}
           </button>
-
         </form>
       </div>
-    </div>
+    </main>
   );
-};
-
-export default Contact;
+}

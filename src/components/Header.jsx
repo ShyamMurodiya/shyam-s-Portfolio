@@ -1,88 +1,85 @@
 // src/components/Header.jsx
 
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
+import { useState } from "react";
 
 export default function Header({ theme, setTheme }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="flex justify-between items-center px-8 py-4 bg-transparent">
-      {/* LEFT: external logo (keeps anchor because it points off-site) */}
+    <header
+      className="
+        fixed top-0 left-0 w-full z-50
+        flex justify-between items-center 
+        px-6 py-4 
+        bg-black/5 backdrop-blur-xl
+        border-b border-white/2
+      "
+    >
+      {/* LEFT: Logo */}
       <a
         href="/"
-        className="font-bold text-[var(--accent)] no-underline text-3xl py-3"
+        className="font-bold text-[var(--accent)] no-underline text-2xl sm:text-3xl py-2"
       >
         Omega 🧸
       </a>
 
-      {/* RIGHT: menu + theme toggle */}
-      <div className="flex items-center gap-20">
-        {/* MENU */}
-        <nav
-          aria-label="primary"
-          className="flex gap-12 text-[var(--accent)] font-bold"
-        >
-          {/* use NavLink so we can style active link */}
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `relative no-underline after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--accent)] after:transition-all after:duration-300 hover:after:w-full ${
-                isActive ? "text-[var(--accent)]" : ""
-              }`
-            }
-          >
-            Home
-          </NavLink>
+      {/* HAMBURGER (mobile) */}
+      <button
+        className="sm:hidden text-[var(--accent)] text-3xl focus:outline-none"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle Menu"
+      >
+        {open ? "✖" : "☰"}
+      </button>
 
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `relative no-underline after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--accent)] after:transition-all after:duration-300 hover:after:w-full ${
-                isActive ? "text-[var(--accent)]" : ""
-              }`
-            }
-          >
-            About
-          </NavLink>
-
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              `relative no-underline after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--accent)] after:transition-all after:duration-300 hover:after:w-full ${
-                isActive ? "text-[var(--accent)]" : ""
-              }`
-            }
-          >
-            Projects
-          </NavLink>
-
-          <NavLink
-            to="/resume"
-            className={({ isActive }) =>
-              `relative no-underline after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--accent)] after:transition-all after:duration-300 hover:after:w-full ${
-                isActive ? "text-[var(--accent)]" : ""
-              }`
-            }
-          >
-            Resume
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `relative no-underline after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-[var(--accent)] after:transition-all after:duration-300 hover:after:w-full ${
-                isActive ? "text-[var(--accent)]" : ""
-              }`
-            }
-          >
-            Contact
-          </NavLink>
+      {/* DESKTOP NAV */}
+      <div className="hidden sm:flex items-center gap-12">
+        <nav aria-label="primary" className="flex gap-10 text-[var(--accent)] font-bold">
+          <NavItem to="/" label="Home" />
+          <NavItem to="/about" label="About" />
+          <NavItem to="/projects" label="Projects" />
+          <NavItem to="/resume" label="Resume" />
+          <NavItem to="/contact" label="Contact" />
         </nav>
 
-        {/* THEME TOGGLE */}
-        <div className="flex gap-2 items-center">
-          <ThemeToggle theme={theme} setTheme={setTheme} />
-        </div>
+        <ThemeToggle theme={theme} setTheme={setTheme} />
       </div>
+
+      {/* MOBILE DROPDOWN */}
+      {open && (
+        <div className="absolute top-full left-0 w-full px-6 py-6 bg-black/80 backdrop-blur-xl border-t border-white/10 flex flex-col gap-6 sm:hidden z-50">
+          <NavItem to="/" label="Home" onClick={() => setOpen(false)} />
+          <NavItem to="/about" label="About" onClick={() => setOpen(false)} />
+          <NavItem to="/projects" label="Projects" onClick={() => setOpen(false)} />
+          <NavItem to="/resume" label="Resume" onClick={() => setOpen(false)} />
+          <NavItem to="/contact" label="Contact" onClick={() => setOpen(false)} />
+
+          <div className="mt-4">
+            <ThemeToggle theme={theme} setTheme={setTheme} />
+          </div>
+        </div>
+      )}
     </header>
+  );
+}
+
+/* REUSABLE NAVLINK */
+function NavItem({ to, label, onClick }) {
+  return (
+    <NavLink
+      to={to}
+      onClick={onClick}
+      className={({ isActive }) =>
+        `relative no-underline text-lg
+         after:content-[''] after:absolute after:left-0 after:bottom-0
+         after:h-[2px] after:w-0 after:bg-[var(--accent)]
+         after:transition-all after:duration-300 hover:after:w-full
+         ${isActive ? "text-[var(--accent)]" : "text-[var(--accent)]/80"}`
+      }
+    >
+      {label}
+    </NavLink>
   );
 }

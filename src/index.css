@@ -1,116 +1,16 @@
 @import "tailwindcss";
-/* basic theme variables */
+
+/* ------------------------------
+   THEME VARIABLES
+------------------------------ */
 :root {
-  --bg: linear-gradient(180deg,#f8fafc 0%, #eef2ff 100%);
-  --card: #fff;
+  --bg: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  --card: #ffffff;
   --text: #0f1724;
   --muted: #6b7280;
   --accent: #2563eb;
 }
 
-/* general page */
-body {
-  background: var(--bg);
-  color: var(--text);
-}
-
-/* card / surface */
-.surface {
-  background: var(--card);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
-  border-radius: 12px;
-  padding: 1rem;
-}
-
-/* lighter alternate card */
-.surface-2 {
-  background: var(--card-2);
-  border: 1px solid rgba(15,23,36,0.04);
-  box-shadow: var(--shadow-sm);
-  border-radius: 10px;
-  padding: 0.75rem;
-}
-
-/* call-to-action / button */
-.btn-accent {
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  color: white;
-  padding: 0.6rem 0.9rem;
-  border-radius: 10px;
-  font-weight: 600;
-  border: none;
-  box-shadow: 0 6px 18px rgba(30,86,214,0.16);
-  cursor: pointer;
-  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
-}
-.btn-accent:active { transform: translateY(1px); }
-.btn-accent:disabled { opacity: .6; cursor: not-allowed; box-shadow:none; }
-
-/* subtle glass / frosted panel for hero/header */
-.glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.55));
-  backdrop-filter: blur(6px) saturate(110%);
-  -webkit-backdrop-filter: blur(6px) saturate(110%);
-  border: 1px solid rgba(15,23,36,0.05);
-  box-shadow: var(--shadow-lg);
-  border-radius: 16px;
-  padding: 1.25rem;
-}
-
-/* headings */
-h1, h2, h3 {
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-.lead {
-  color: var(--muted);
-  font-size: 1rem;
-}
-
-/* subtle divider */
-.divider {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(11,19,32,0.06), transparent);
-  margin: 1rem 0;
-}
-
-/* keep your star background but tone opacity for light mode */
-.bg-stars {
-  background-image: url("/stars.svg");
-  background-repeat: repeat;
-  background-size: auto;
-  /* overlay texture to reduce contrast with UI */
-}
-.light-stars-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.85));
-  mix-blend-mode: normal;
-  opacity: 0.8;
-}
-
-/* re-use your moveStars keyframes (no change needed) */
-@keyframes moveStars {
-  from { background-position: 0 0; }
-  to   { background-position: 10000px 0; }
-}
-.animate-move-stars { animation: moveStars 120s linear infinite; }
-
-/* utility for small badges */
-.badge {
-  display: inline-block;
-  padding: 0.2rem 0.45rem;
-  font-size: 0.75rem;
-  border-radius: 999px;
-  background: rgba(30,86,214,0.12);
-  color: var(--accent);
-  border: 1px solid rgba(30,86,214,0.06);
-  font-weight: 600;
-}
-
-/* dark overrides */
 html[data-theme="dark"] {
   --bg: linear-gradient(to left, rgb(27 20 41), rgb(20 15 35));
   --card: #151825;
@@ -119,72 +19,58 @@ html[data-theme="dark"] {
   --accent: #4f9bff;
 }
 
-html, body, #root { height: 100%; margin: 0; }
+/* ------------------------------
+   GLOBAL RESET
+------------------------------ */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
 }
 
+/* ------------------------------
+   STAR BACKGROUND (SINGLE VERSION)
+------------------------------ */
+/* add this to src/index.css (replace old .stars rules) */
 
-/* ⭐ Star background animation */
+/* stars background layer (full-screen and behind content) */
 .stars {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* allows clicks through the layer */
+  z-index: -10; /* keep behind everything */
   background-image: url('/stars.svg');
+  background-repeat: repeat;
+  background-position: center;
   background-size: cover;
-  background-repeat: repeat;
-  animation: moveStars 60s linear infinite;
+  animation: moveStars 120s linear infinite;
+  opacity: 0.95; /* tweak to taste; lower for subtler stars */
 }
 
-@keyframes moveStars {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 10000px 5000px;
-  }
-}
-
-
-/* src/index.css (or existing global file) */
-
-/* moving background for full-page */
-.bg-stars {
-  background-image: url("/stars.svg");
-  background-repeat: repeat;
-  background-size: auto;
-  /* make it subtle — adjust opacity with overlay in markup */
-}
-
-/* keyframes to move background horizontally */
+/* keep a single keyframe definition */
 @keyframes moveStars {
   from { background-position: 0 0; }
-  to   { background-position: 10000px 0; } /* large value for smooth slow motion */
+  to   { background-position: 8000px 4000px; }
 }
 
-/* helper animate class */
-.animate-move-stars {
-  animation: moveStars 120s linear infinite; /* 120s = speed, change to 60s for faster */
+/* Move stars slowly */
+@keyframes moveStars {
+  from { background-position: 0 0; }
+  to { background-position: 8000px 4000px; }
 }
 
-/* smaller variant if you want stars only in header area */
-.bg-stars-header {
-  background-image: url("/stars.svg");
-  background-repeat: repeat;
-  background-size: auto;
-  opacity: 1;
-}
-
-/* optional: small twinkle (subtle scale effect) */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.9; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(0.9); }
-}
-.twinkle { animation: twinkle 6s ease-in-out infinite; }
-
-
+/* ------------------------------
+   ANIMATIONS
+------------------------------ */
 @keyframes wave {
   0% { transform: rotate(0deg); }
   15% { transform: rotate(20deg); }
@@ -199,11 +85,4 @@ body {
   display: inline-block;
   transform-origin: 70% 70%;
   animation: wave 1.8s infinite;
-}
-
-.project-glow {
-  box-shadow: 0 10px 30px rgba(99,33,182,0.12),
-              inset 0 0 0 1px rgba(114,63,173,0.06);
-  border-radius: 16px;
-  border: 1px solid rgba(114,63,173,0.06);
 }
