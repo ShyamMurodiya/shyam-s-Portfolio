@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectsGrid from "../components/ProjectsGrid";
+import ProjectsGrid from "../components/projects/ProjectsGrid";
 import { PROJECTS } from "../data/projects";
 
 export default function ProjectsPage() {

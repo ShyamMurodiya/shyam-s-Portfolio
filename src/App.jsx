@@ -3,11 +3,11 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import useTheme from "./utils/useTheme";
 
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About"; // small About used on home
-import Socials from "./components/Socials";
-import Footer from "./components/Footer";
+import Header from "./components/mainPage/Header";
+import Hero from "./components/mainPage/Hero";
+import About from "./components/mainPage/About"; // small About used on home
+import Socials from "./components/mainPage/Socials";
+import Footer from "./components/mainPage/Footer";
 import AboutPage from "./pages/AboutPage"; // full about page
 import ResumePage from "./pages/ResumePage";
 import ProjectsPage from "./pages/ProjectsPage";

@@ -1,18 +1,18 @@
 // keep imports minimal and Vite-friendly
 export const PROJECTS = [
   {
-    title: "Chatify",
+    title: "Quickmeds",
     description:
-      "Personal chat room / workspace built with React, Firebase and Material-UI. Includes realtime messaging, image sharing and reactions.",
-    image: new URL("../assets/project-chatify.png", import.meta.url).href,
+      " A QUCIKMED is a online pharmacy that deliver product to your doorstep ",
+    image: new URL("../assets/quickmed.png", import.meta.url).href,
     github: "https://github.com/yourname/chatify",
     demo: "#",
   },
   {
-    title: "Bits-Of-Code",
+    title: "Portfolio",
     description:
-      "Personal blog built with Next.js + Tailwind. Renders markdown posts, supports dark mode and easy publishing workflow.",
-    image: new URL("../assets/project-blog.png", import.meta.url).href,
+      "The portfolio is created usint React Js with a Vite and tailwind Css",
+    image: new URL("../assets/portfolio.png", import.meta.url).href,
     github: "https://github.com/yourname/bits-of-code",
     demo: "#",
   },

@@ -1,7 +1,6 @@
 // src/components/Hero.jsx
 import React from "react";
-import heroImg from "../assets/hero.png"; // <-- main page image
-
+import heroImg from "../../assets/hero1.png";
 export default function Hero() {
   return (
     <section className="w-full min-h-[80vh] flex flex-col-reverse md:flex-row items-center justify-between px-6 py-12">
@@ -23,7 +22,7 @@ export default function Hero() {
 
       {/* RIGHT SIDE IMAGE */}
       <div className="w-full md:w-1/2 flex items-center justify-center">
-        <div className="w-48 sm:w-64 md:w-80 lg:w-96">
+        <div className="w-40 sm:w-56 md:w-64 lg:w-72 xl:w-80">
           <img
             src={heroImg}
             alt="Hero Illustration"
