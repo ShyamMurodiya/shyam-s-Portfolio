@@ -29,9 +29,9 @@ export default function Footer() {
         {/* Right — icons */}
         <div className="flex items-center justify-center gap-4">
           <FooterIcon href="https://github.com/" Icon={FaGithub} />
-          <FooterIcon href="#" Icon={FaTwitter} />
-          <FooterIcon href="#" Icon={FaLinkedin} />
-          <FooterIcon href="#" Icon={FaInstagram} />
+          <FooterIcon href="https://twitter.com/404UserNotFound" Icon={FaTwitter} />
+          <FooterIcon href="https://www.linkedin.com/in/shyam-murodiya-376109293/" Icon={FaLinkedin} />
+          <FooterIcon href="https://www.instagram.com/shyam_murodiya/" Icon={FaInstagram} />
         </div>
       </div>
     </footer>

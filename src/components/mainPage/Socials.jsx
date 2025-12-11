@@ -5,9 +5,9 @@ import { FaGithub, FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
 export default function Socials() {
   const socials = [
     { icon: FaGithub, link: "https://github.com/" },
-    { icon: FaTwitter, link: "#" },
-    { icon: FaLinkedin, link: "#" },
-    { icon: FaInstagram, link: "#" },
+    { icon: FaTwitter, link: "https://twitter.com/404UserNotFound" },
+    { icon: FaLinkedin, link: "https://www.linkedin.com/in/shyam-murodiya-376109293/" },
+    { icon: FaInstagram, link: "https://www.instagram.com/shyam_murodiya/" },
   ];
 
   return (
