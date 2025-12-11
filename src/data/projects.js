@@ -14,15 +14,15 @@ export const PROJECTS = [
       "The portfolio is created usint React Js with a Vite and tailwind Css",
     image: new URL("../assets/portfolio.png", import.meta.url).href,
     github: "https://github.com/yourname/bits-of-code",
-    demo: "#",
+    demo: "https://shyam-s-portfolio-z6is.vercel.app/",
   },
   {
-    title: "Editor.io",
+    title: "Cup Of Caffein",
     description:
-      "Online Markdown + code editor with instant preview and local autosave. Supports custom HTML blocks and GFM.",
-    image: new URL("../assets/project-editor.png", import.meta.url).href,
+     "A modern café website built with React. Features dynamic menu fetching from Google Sheets API, real-time search &  mobile-friendly user experience.",
+    image: new URL("../assets/cop.png", import.meta.url).href,
     github: "https://github.com/yourname/editor-io",
-    demo: "#",
+    demo: "https://coc-ngp.vercel.app/",
   },
   // add more items here
 ];
