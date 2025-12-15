@@ -61,7 +61,7 @@ export default function ProjectCard({ project }) {
             rel="noreferrer"
             className="w-full sm:w-auto text-center px-4 py-2 rounded-lg bg-[var(--card)] text-sm font-semibold no-underline shadow-sm hover:opacity-90"
           >
-            Demo
+            Visit
           </a>
         </div>
       </div>

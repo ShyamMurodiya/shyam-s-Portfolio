@@ -4,9 +4,9 @@ export const PROJECTS = [
     title: "Quickmeds",
     description:
       " A QUCIKMED is a online pharmacy that deliver product to your doorstep ",
-    image: new URL("../assets/quickmed.png", import.meta.url).href,
-    github: "https://github.com/yourname/chatify",
-    demo: "#",
+    image: new URL("../assets/quickmeds.png", import.meta.url).href,
+    github: "https://github.com/TanmayWarthe/QuickMeds-An-Online-Pharamacy.git",
+    demo: "https://quickmedsonlinepharmacy.onrender.com/",
   },
   {
     title: "Portfolio",
