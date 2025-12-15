@@ -13,7 +13,7 @@ export const PROJECTS = [
     description:
       "The portfolio is created usint React Js with a Vite and tailwind Css",
     image: new URL("../assets/portfolio.png", import.meta.url).href,
-    github: "https://github.com/yourname/bits-of-code",
+    github: "https://github.com/ShyamMurodiya/shyam-s-Portfolio.git",
     demo: "https://shyam-s-portfolio-z6is.vercel.app/",
   },
   {
@@ -21,8 +21,8 @@ export const PROJECTS = [
     description:
      "A modern café website built with React. Features dynamic menu fetching from Google Sheets API, real-time search &  mobile-friendly user experience.",
     image: new URL("../assets/cop.png", import.meta.url).href,
-    github: "https://github.com/yourname/editor-io",
-    demo: "https://coc-ngp.vercel.app/",
+    github: "https://github.com/ShyamMurodiya/Cup-Of-Caffeine.git",
+    demo: "https://cup-of-caffeine.vercel.app/",
   },
   // add more items here
 ];
